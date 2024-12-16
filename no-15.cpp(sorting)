@@ -1,0 +1,82 @@
+#include<iostream>
+using namespace std;
+
+void display(int id[], int marks[], int size) {
+    cout << "Data:\n";
+    for (int i = 0; i < size; i++) {
+        cout << "ID: " << id[i] << " -> Score: " << marks[i] << endl;
+    }
+    cout << endl;
+}
+
+void bubble(int id[], int marks[], int size) {
+    cout << "Bubble Sort:\n";
+    for (int i = 0; i < size - 1; ++i) {
+        for (int j = 0; j < size - i - 1; ++j) {
+            if (marks[j] > marks[j + 1]) {
+                swap(marks[j], marks[j + 1]);
+                swap(id[j], id[j + 1]);
+            }
+        }
+    }
+}
+
+void selection(int id[], int marks[], int size) {
+    cout << "Selection Sort:\n";
+    for (int i = 0; i < size - 1; ++i) {
+        int min_idx = i;
+        for (int j = i + 1; j < size; ++j) {
+            if (marks[j] < marks[min_idx]) {
+                min_idx = j;
+            }
+        }
+        swap(marks[i], marks[min_idx]);
+        swap(id[i], id[min_idx]);
+    }
+}
+
+void insertion(int id[], int marks[], int size) {
+    cout << "Insertion Sort:\n";
+    for (int i = 1; i < size; ++i) {
+        int key = marks[i];
+        int key_id = id[i];
+        int j = i - 1;
+
+        while (j >= 0 && marks[j] > key) {
+            marks[j + 1] = marks[j];
+            id[j + 1] = id[j];
+            j--;
+        }
+        marks[j + 1] = key;
+        id[j + 1] = key_id;
+    }
+}
+
+int main() {
+    int n = 5;
+    
+    int id[] = {101, 102, 103, 104, 105};
+    int score[] = {78, 85, 92, 56, 69};
+
+    display(id, score, n);
+
+    bubble(id, score, n);
+
+    display(id, score, n);
+
+    int id2[] = {101, 102, 103, 104, 105};
+    int score2[] = {78, 85, 92, 56, 69};
+
+    selection(id2, score2, n);
+
+    display(id2, score2, n);
+
+    int id3[] = {101, 102, 103, 104, 105};
+    int score3[] = {78, 85, 92, 56, 69};
+
+    insertion(id3, score3, n);
+
+    display(id3, score3, n);
+
+    return 0;
+}
